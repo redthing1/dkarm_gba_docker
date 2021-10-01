@@ -1,6 +1,6 @@
 FROM debian:bullseye
 
-ARG DEVKITPRO /opt/devkitpro
+ARG DEVKITPRO=/opt/devkitpro
 ENV DEVKITPRO=$DEVKITPRO
 
 # install deps
@@ -16,15 +16,17 @@ RUN dkp-pacman -Sy
 RUN dkp-pacman -S --noconfirm gba-dev
 
 # install my custom tools
-ARG DKP_TOOLS_PATH $DEVKITPRO/tools/bin
-
-# install tiled2gba
-RUN git clone https://github.com/redthing1/Tiled2GBA.git /tmp/tiled2gba && cd /tmp/tiled2gba \
-    && mkdir build && cd build && cmake .. && make && cp Tiled2GBA $DKP_TOOLS_PATH
+ARG DKP_TOOLS_PATH=$DEVKITPRO/tools/bin
+ENV DKP_TOOLS_PATH=$DKP_TOOLS_PATH
 
 # install crunch
-# RUN git clone https://github.com/redthing1/Tiled2GBA.git /tmp/tiled2gba && cd /tmp/tiled2gba \
-#     && mkdir build && cd build && cmake .. && make && cp Tiled2GBA $DKP_TOOLS_PATH
+RUN git clone https://github.com/redthing1/crunch.git /tmp/crunch && cd /tmp/crunch \
+    && mkdir build && cd build && cmake .. && make -j$(nproc) && cp crunch_gen $DKP_TOOLS_PATH
+
+# install tiled2gba
+RUN git clone https://github.com/redthing1/Tiled2GBA.git /tmp/tiled2gba && cd /tmp/tiled2gba/converter \
+    && mkdir build && cd build && cmake .. && make -j$(nproc) && cp Tiled2GBA $DKP_TOOLS_PATH
+
 
 WORKDIR /source
 
