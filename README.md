@@ -19,7 +19,8 @@ docker build --pull -t dkarm_gba_docker:local .
 ## usage
 to open a shell inside the container with the current directory mounted
 ```sh
-docker run -it --rm -v $(pwd):/source dkarm_gba_docker:local -l -c bash
+
+docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_gba_docker:local -l -c bash
 ```
 
 for example, to build [duster](https://github.com/redthing1/duster) with this docker image:
