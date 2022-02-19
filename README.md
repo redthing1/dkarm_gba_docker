@@ -42,6 +42,7 @@ docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_dusk:loca
 ```
 
 ### example: celeste classic v1.1 (with base flavor)
+to build the [celeste classic](https://github.com/JeffRuLz/Celeste-Classic-GBA) homebrew rom v1.1 (1.2 has a broken makefile, an issue is open):
 ```sh
 docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_base:local -l -c "git checkout v1.1 && make"
 ```
