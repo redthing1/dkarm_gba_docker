@@ -5,7 +5,7 @@ ENV DEVKITPRO=$DEVKITPRO
 
 # install basic deps
 RUN apt update && apt install -y \
-    make build-essential wget curl git cmake
+    make build-essential wget curl git
 
 # install dkp pacman
 RUN wget https://github.com/devkitPro/pacman/releases/download/v1.0.2/devkitpro-pacman.amd64.deb -O /tmp/dkp_pacman.deb && apt install -y /tmp/dkp_pacman.deb

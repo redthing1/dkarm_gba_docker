@@ -8,7 +8,7 @@ what most people are looking for is the **base** flavor. see below for what is i
 ## includes
 
 ### base devkit (default)
-+ Build tools (`git`, `c`, `c++`, `wget`, `curl`)
++ Build tools (`devkitarm`, `git`, `make`, `c`, `c++`, `wget`, `curl`)
 + DevkitARM (`gba-dev`)
 ### dusk addons (`dusk` flavor only)
 + Asset packers (`crunch`, `Tiled2GBA`)
