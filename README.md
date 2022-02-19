@@ -30,12 +30,21 @@ docker build -f dusk/Dockerfile --pull -t dkarm_dusk:local .
 
 ## usage
 to open a shell inside the container with the current directory mounted
-```sh
 
+### open a shell in your project
+```sh
 docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_base:local -l -c bash
 ```
-
+### example: duster (with dusk flavor)
 for example, to build [duster](https://github.com/redthing1/duster) with the dusk flavor docker image:
 ```sh
 pushd . && git submodule update --init --recursive && cd src/DusterGBA && make clean && make build && popd
 ```
+
+### example: celeste classic v1.1 (with base flavor)
+```sh
+docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_base:local -l -c "git checkout v1.1 && make"
+```
+
+### example: varoom3d from butano
+todo: needs python
