@@ -19,12 +19,12 @@ this is how you build the docker image:
 
 ### base devkit
 ```sh
-docker build -f minimal/Dockerfile --pull -t dkarm_base:local .
+docker build -f base/Dockerfile --pull -t dkarm_base:local .
 ```
 
 ### dusk devkit
 ```sh
-docker build -f base/Dockerfile --pull -t dkarm_dusk:local .
+docker build -f dusk/Dockerfile --pull -t dkarm_dusk:local .
 ```
 
 ## usage

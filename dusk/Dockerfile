@@ -15,10 +15,11 @@ RUN dkp-pacman -Sy
 # install packages
 RUN dkp-pacman -S --noconfirm gba-dev
 
-# install my custom tools
+# set devkitpro variables
 ARG DKP_TOOLS_PATH=$DEVKITPRO/tools/bin
 ENV DKP_TOOLS_PATH=$DKP_TOOLS_PATH
 
+# install my custom tools
 # install crunch
 RUN git clone https://github.com/redthing1/crunch.git /tmp/crunch && cd /tmp/crunch \
     && mkdir build && cd build && cmake .. && make -j$(nproc) && cp crunch_gen $DKP_TOOLS_PATH
