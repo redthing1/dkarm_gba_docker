@@ -38,7 +38,7 @@ docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_base:loca
 ### example: duster (with dusk flavor)
 for example, to build [duster](https://github.com/redthing1/duster) with the dusk flavor docker image:
 ```sh
-pushd . && git submodule update --init --recursive && cd src/DusterGBA && make clean && make build && popd
+docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_dusk:local -l -c "pushd . && git submodule update --init --recursive && cd src/DusterGBA && make clean && make build && popd"
 ```
 
 ### example: celeste classic v1.1 (with base flavor)
