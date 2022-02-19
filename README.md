@@ -2,14 +2,15 @@
 # devkitarm gba for docker
 
 a docker image for building gba games with devkitarm.
-comes in **multiple flavors**: a **base image**, and an enhanced **dusk image** including a bunch of tools and utilities to build various projects
+comes in **multiple flavors**: a **base image**, and an enhanced **dusk image** including a bunch of tools and utilities to build various projects.
 
+what most people are looking for is the **base** flavor. see below for what is included, and for instructions to build the image locally.
 ## includes
 
-### base devkit
+### base devkit (default)
 + Build tools (`git`, `c`, `c++`, `wget`, `curl`)
 + DevkitARM (`gba-dev`)
-### dusk addons (optional)
+### dusk addons (`dusk` flavor only)
 + Asset packers (`crunch`, `Tiled2GBA`)
 + Nelua (`nelua`)
 + D (`dub`, `dmd`, `ldc2`)
@@ -17,7 +18,7 @@ comes in **multiple flavors**: a **base image**, and an enhanced **dusk image** 
 ## build
 this is how you build the docker image:
 
-### base devkit
+### base devkit (recommended)
 ```sh
 docker build -f base/Dockerfile --pull -t dkarm_base:local .
 ```
