@@ -41,10 +41,10 @@ for example, to build [duster](https://github.com/redthing1/duster) with the dus
 docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_dusk:local -l -c "pushd . && git submodule update --init --recursive && cd src/DusterGBA && make clean && make build && popd"
 ```
 
-### example: celeste classic v1.1 (with base flavor)
-to build the [celeste classic](https://github.com/JeffRuLz/Celeste-Classic-GBA) homebrew rom v1.1 (1.2 has a broken makefile, an issue is open):
+### example: celeste classic
+to build the [celeste classic](https://github.com/JeffRuLz/Celeste-Classic-GBA) homebrew rom
 ```sh
-docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_base:local -l -c "git checkout v1.1 && make"
+docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_base:local -l -c "make"
 ```
 
 ### example: varoom3d from butano
