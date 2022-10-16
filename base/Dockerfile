@@ -1,14 +1,17 @@
-FROM debian:sid-slim
+FROM debian:bullseye-slim
 
 ARG DEVKITPRO=/opt/devkitpro
 ENV DEVKITPRO=$DEVKITPRO
 
 # install basic deps
 RUN apt update && apt install -y \
-    make build-essential wget curl git
+    make build-essential wget curl git \
+    && apt autoremove -y && apt clean
 
-# install dkp pacman
-RUN wget https://github.com/devkitPro/pacman/releases/download/v1.0.2/devkitpro-pacman.amd64.deb -O /tmp/dkp_pacman.deb && apt install -y /tmp/dkp_pacman.deb
+RUN wget https://apt.devkitpro.org/install-devkitpro-pacman \
+  && chmod +x ./install-devkitpro-pacman \
+  && sed -i 's/apt-get install/apt-get -y install/g' ./install-devkitpro-pacman \
+  && ./install-devkitpro-pacman
 
 # sync dkp pacman
 RUN dkp-pacman -Sy
