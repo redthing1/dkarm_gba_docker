@@ -44,8 +44,9 @@ RUN git clone https://github.com/edubart/nelua-lang.git /tmp/nelua-lang && cd /t
     && make && make install
 
 # install dlang
-RUN wget https://s3.us-west-2.amazonaws.com/downloads.dlang.org/releases/2021/dmd_2.098.0-0_amd64.deb -O /tmp/dlang_dmd.deb && apt install -y /tmp/dlang_dmd.deb
-RUN apt -y install ldc
+# RUN wget https://downloads.dlang.org/releases/2022/dmd_2.100.2-0_amd64.deb -O /tmp/dlang_dmd.deb && apt install -y /tmp/dlang_dmd.deb
+RUN curl -fsS https://dlang.org/install.sh | bash -s install ldc-1.30.0 \
+  && echo "source ~/dlang/ldc-1.30.0/activate" >> ~/.bashrc
 
 WORKDIR /source
 
