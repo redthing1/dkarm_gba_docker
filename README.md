@@ -66,5 +66,5 @@ docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_base:loca
 
 To build [Varoom3D](https://github.com/GValiente/butano) with the Dusk flavor:
 ```sh
-_TODO: This build requires Python._
+docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" -e LIBBUTANOABS=/source/butano dkarm_dusk:local -l -c "cd /source/games/varooom-3d/ && make -j2"
 ```

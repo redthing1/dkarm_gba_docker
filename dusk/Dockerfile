@@ -9,10 +9,14 @@ RUN apt update && apt install -y \
     build-essential cmake \
     # for scripting
     bash curl wget git \
+    # for Python 3
+    python3 python3-pip \
     # for devkitpro
     dpkg \
     # clean up
     && apt autoremove -y && apt clean
+
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
 # install dkp pacman
 RUN wget https://apt.devkitpro.org/install-devkitpro-pacman \
