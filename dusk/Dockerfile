@@ -20,6 +20,8 @@ RUN wget https://apt.devkitpro.org/install-devkitpro-pacman \
   && sed -i 's/apt-get install/apt-get -y install/g' ./install-devkitpro-pacman \
   && ./install-devkitpro-pacman
 
+# Fix the missing /etc/mtab
+RUN ln -s /proc/mounts /etc/mtab
 # sync dkp pacman
 RUN dkp-pacman -Sy
 # install packages
