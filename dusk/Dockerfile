@@ -52,4 +52,9 @@ RUN curl -fsS https://dlang.org/install.sh | bash -s install ldc-1.30.0 \
 
 WORKDIR /source
 
-ENTRYPOINT [ "bash", "-l" ]
+# Add the entrypoint script to the Docker image
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Set the entrypoint to the script
+ENTRYPOINT ["/entrypoint.sh", "bash", "-l"]
