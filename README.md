@@ -24,15 +24,15 @@ You can build the Docker images using the provided Makefile targets:
 
 ### Base Devkit (recommended)
 
-\```sh
+```sh
 make docker-build
-\```
+```
 
 ### Dusk Devkit
 
-\```sh
+```sh
 make docker-build-dusk
-\```
+```
 
 ## Usage
 
@@ -40,9 +40,9 @@ To open a shell inside the container with the current directory mounted:
 
 ### Opening a Shell in Your Project
 
-\```sh
+```sh
 docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_base:local -l -c bash
-\```
+```
 
 ## Examples
 
@@ -50,17 +50,17 @@ docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_base:loca
 
 To build [duster](https://github.com/redthing1/duster) with the Dusk flavor:
 
-\```sh
+```sh
 docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_dusk:local -l -c "pushd . && git submodule update --init --recursive && cd src/DusterGBA && make clean && make build && popd"
-\```
+```
 
 ### Celeste classic
 
 To build the [Celeste Classic](https://github.com/JeffRuLz/Celeste-Classic-GBA) homebrew ROM:
 
-\```sh
+```sh
 docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_base:local -l -c "make"
-\```
+```
 
 ### Varoom3D from Butano
 
