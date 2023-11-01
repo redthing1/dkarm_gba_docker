@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 ARG DEVKITPRO=/opt/devkitpro
 ENV DEVKITPRO=$DEVKITPRO
