@@ -1,51 +1,70 @@
 
-# devkitarm gba for docker
+# DevkitARM GBA for Docker
 
-a docker image for building gba games with devkitarm.
-comes in **multiple flavors**: a **base image**, and an enhanced **dusk image** including a bunch of tools and utilities to build various projects.
+This repository provides a Docker image for building GBA games with DevkitARM. It offers multiple flavors:
 
-what most people are looking for is the **base** flavor. see below for what is included, and for instructions to build the image locally.
-## includes
+- **Base Image**: What most users typically need.
+- **Dusk Image**: Enhanced with additional tools and utilities for a range of projects.
 
-### base devkit (default)
-+ Build tools (`devkitarm`, `git`, `make`, `c`, `c++`, `wget`, `curl`)
-+ DevkitARM (`gba-dev`)
-### dusk addons (`dusk` flavor only)
-+ Asset packers (`crunch`, `Tiled2GBA`)
-+ Nelua (`nelua`)
-+ D (`dub`, `dmd`, `ldc2`)
+## Included Packages
 
-## build
-this is how you build the docker image:
+### Base Devkit (default)
 
-### base devkit (recommended)
+- **Build tools**: `devkitarm`, `git`, `make`, `c`, `c++`, `wget`, `curl`
+- **DevkitARM package**: `gba-dev`
+
+### Dusk Addons (only in `dusk` flavor)
+
+- **Asset packers**: `crunch`, `Tiled2GBA`
+- **Programming languages**: `Nelua`, `D`
+
+## Building the Docker Image
+
+You can build the Docker images using the provided Makefile targets:
+
+### Base Devkit (recommended)
+
 ```sh
-docker build -f base/Dockerfile --pull -t dkarm_base:local .
+make docker-build
 ```
 
-### dusk devkit
+### Dusk Devkit
+
 ```sh
-docker build -f dusk/Dockerfile --pull -t dkarm_dusk:local .
+make docker-build-dusk
 ```
 
-## usage
-to open a shell inside the container with the current directory mounted
+## Usage
 
-### open a shell in your project
+To open a shell inside the container with the current directory mounted:
+
+### Opening a Shell in Your Project
+
 ```sh
 docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_base:local -l -c bash
 ```
-### example: duster (with dusk flavor)
-for example, to build [duster](https://github.com/redthing1/duster) with the dusk flavor docker image:
+
+## Examples
+
+### Duster (with dusk flavor)
+
+To build [duster](https://github.com/redthing1/duster) with the Dusk flavor:
+
 ```sh
-docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_dusk:local -l -c "pushd . && git submodule update --init --recursive && cd src/DusterGBA && make clean && make build && popd"
+docker run -it --rm -v $(pwd):/source dkarm_dusk:local -l -c "pushd . && git submodule update --init --recursive && cd src/DusterGBA && make clean && make build && popd"
 ```
 
-### example: celeste classic
-to build the [celeste classic](https://github.com/JeffRuLz/Celeste-Classic-GBA) homebrew rom
+### Celeste classic
+
+To build the [Celeste Classic](https://github.com/JeffRuLz/Celeste-Classic-GBA) homebrew ROM:
+
 ```sh
 docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_base:local -l -c "make"
 ```
 
-### example: varoom3d from butano
-todo: needs python
+### Varoom3D from Butano
+
+To build [Varoom3D](https://github.com/GValiente/butano) with the Dusk flavor:
+```sh
+docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" -e LIBBUTANOABS=/source/butano dkarm_dusk:local -l -c "cd /source/games/varooom-3d/ && make -j2"
+```

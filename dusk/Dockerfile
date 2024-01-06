@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 ARG DEVKITPRO=/opt/devkitpro
 ENV DEVKITPRO=$DEVKITPRO
@@ -9,10 +9,14 @@ RUN apt update && apt install -y \
     build-essential cmake \
     # for scripting
     bash curl wget git \
+    # for Python 3
+    python3 python3-pip \
     # for devkitpro
     dpkg \
     # clean up
     && apt autoremove -y && apt clean
+
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
 # install dkp pacman
 RUN wget https://apt.devkitpro.org/install-devkitpro-pacman \
@@ -20,6 +24,8 @@ RUN wget https://apt.devkitpro.org/install-devkitpro-pacman \
   && sed -i 's/apt-get install/apt-get -y install/g' ./install-devkitpro-pacman \
   && ./install-devkitpro-pacman
 
+# Fix the missing /etc/mtab
+RUN ln -s /proc/mounts /etc/mtab
 # sync dkp pacman
 RUN dkp-pacman -Sy
 # install packages
@@ -50,4 +56,9 @@ RUN curl -fsS https://dlang.org/install.sh | bash -s install ldc-1.30.0 \
 
 WORKDIR /source
 
-ENTRYPOINT [ "bash", "-l" ]
+# Add the entrypoint script to the Docker image
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Set the entrypoint to the script
+ENTRYPOINT ["/entrypoint.sh", "bash", "-l"]
